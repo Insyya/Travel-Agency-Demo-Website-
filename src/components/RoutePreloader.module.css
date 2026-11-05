@@ -1,0 +1,177 @@
+.preloader {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 28px;
+  color: #f7f3e9;
+  background:
+    radial-gradient(ellipse at 77% 48%, rgba(76, 117, 93, .38), transparent 34%),
+    radial-gradient(ellipse at 5% 100%, rgba(22, 52, 46, .8), transparent 42%),
+    #173a35;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .7s cubic-bezier(.2,.7,.25,1), visibility 0s linear .7s;
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader::before,
+.preloader::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.preloader::before {
+  inset: 0;
+  opacity: .14;
+  background-image:
+    linear-gradient(rgba(242,236,218,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,236,218,.12) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg, transparent, black 68%);
+}
+
+.preloader::after {
+  top: 50%;
+  right: -14%;
+  width: min(52vw, 700px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(242,236,218,.08);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 62px rgba(242,236,218,.025), 0 0 0 124px rgba(242,236,218,.02);
+}
+
+.route {
+  position: relative;
+  z-index: 1;
+  width: min(88vw, 1120px);
+  aspect-ratio: 520 / 290;
+}
+
+.sun {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 125px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,173,145,.19), rgba(240,173,145,.045) 58%, transparent 70%);
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.routeBase,
+.routeDash,
+.originStop,
+.destinationStop {
+  vector-effect: non-scaling-stroke;
+}
+
+.routeBase {
+  stroke: rgba(247,243,233,.18);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 9;
+  stroke-linecap: round;
+}
+
+.routeDash {
+  stroke: #f0ad91;
+  stroke-width: 1.5;
+  stroke-dasharray: 2 11;
+  stroke-linecap: round;
+}
+
+.originStop,
+.destinationStop {
+  fill: #173a35;
+  stroke: #f0ad91;
+  stroke-width: 1.5;
+}
+
+.destinationStop {
+  fill: #f0ad91;
+  filter: drop-shadow(0 0 8px rgba(240,173,145,.75));
+}
+
+.planeHalo {
+  fill: #f0ad91;
+  stroke: rgba(240,173,145,.13);
+  stroke-width: 16;
+}
+
+.planeIcon {
+  fill: #173a35;
+}
+
+.coordinate {
+  position: absolute;
+  color: rgba(247,243,233,.52);
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: .12em;
+}
+
+.coordinate b {
+  color: rgba(247,243,233,.8);
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+.origin {
+  bottom: 1%;
+  left: 1%;
+}
+
+.destination {
+  top: 3%;
+  right: 0;
+  text-align: right;
+}
+
+.caption {
+  position: absolute;
+  right: 1%;
+  bottom: 2%;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(247,243,233,.45);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.caption svg {
+  color: #f0ad91;
+}
+
+.screenReaderText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 700px) {
+  .route { width: min(94vw, 680px); }
+  .sun { width: 86px; }
+}

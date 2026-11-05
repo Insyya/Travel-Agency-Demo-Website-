@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Voyago — Travel, thoughtfully planned
 
-## Getting Started
+Voyago is a responsive, frontend-only travel agency experience built for a Next.js technical assessment. It brings destination inspiration, travel services, interactive mock searches, traveller stories, and contact options together in one polished landing page.
 
-First, run the development server:
+## Technology
+
+- Next.js App Router and React
+- TypeScript
+- Tailwind CSS 4 (with custom responsive design-system styles)
+- GSAP and ScrollTrigger
+- Lucide React icons
+
+## Features
+
+- Responsive sticky navigation with a mobile menu
+- Cinematic GSAP hero sequence with clipped headline reveals, a floating destination postcard, slow image parallax, and scroll-staggered content
+- GSAP hover lift and image-zoom interactions for cards and primary buttons
+- Hero travel search panel with four service tabs
+- Four search modes: flights, hotels, visa guidance, and car rental
+- Client-side mock search results, required-field validation, date range validation, loading feedback, empty states, and detail dialogs
+- Dedicated `/visa`, `/flights`, `/hotels`, and `/cars` booking journeys with service-specific filters, sorting, details, mock booking summaries, and confirmation steps
+- Combined destination planner linking a selected destination to all four service journeys
+- Six destination cards with save controls and shortcuts to destination search
+- Service cards, benefits, animated statistics, and a keyboard-operable testimonial carousel
+- Validated contact and newsletter forms with local success feedback
+- Reduced-motion support, visible keyboard focus, semantic sections, and page metadata
+
+Searches, application requests, bookings, contact submissions, and newsletter subscriptions are demonstration interactions only. No real bookings, tickets, payments, backend, email service, or external travel APIs are connected. Visa details and prices are sample data and are not official immigration guidance. Travel photographs are loaded from Unsplash.
+
+## Run locally
+
+Requirements: Node.js 20.9 or later and npm.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-## Learn More
+The project is compatible with Vercel's standard Next.js deployment flow. A GitHub repository and live deployment have not been created as part of this workspace task.
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+src/
+  app/
+    globals.css   Responsive styles and design tokens
+    layout.tsx    Root layout and SEO metadata
+    page.tsx      Landing page, destination planner, and client-side interactions
+    visa/page.tsx Visa assistance experience
+    flights/page.tsx Flight search and selection experience
+    hotels/page.tsx Hotel search and booking experience
+    cars/page.tsx Car rental search and selection experience
+  components/
+    ServicePage.tsx       Request-time destination query wrapper
+    ServiceExperience.tsx Shared interactive service search/details/booking UI
+  lib/
+    travel-data.ts Local visa, flight, hotel, car, and destination sample data
+public/           Static assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Mock data
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The detailed visa, flight, hotel, car, and destination datasets are stored in `src/lib/travel-data.ts`. Landing-page copy and presentation data remain alongside the landing page. Search forms filter and sort local sample results; booking/application details and confirmations are simulated in React state. The project performs no network requests for search or form submissions.
