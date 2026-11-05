@@ -28,6 +28,8 @@ import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import DestinationCard from "@/components/DestinationCard";
+import ServiceCard from "@/components/ServiceCard";
 import RoutePreloader from "@/components/RoutePreloader";
 
 type SearchTab = "Flights" | "Hotels" | "Visa" | "Cars";
@@ -793,18 +795,7 @@ export default function Home() {
             </div>
             <div className="services-grid">
               {services.map(({ icon: Icon, title, description, image, link }, index) => (
-                <article className="service-card" key={title}>
-                  <div className="service-image">
-                    <Image src={image} alt="" width={900} height={500} sizes="(max-width: 760px) 100vw, 25vw" unoptimized />
-                    <span className="service-count">0{index + 1}</span>
-                  </div>
-                  <div className="service-body">
-                    <div className="service-icon"><Icon size={19} /></div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <Link className="text-link" href={`/${link.toLowerCase()}`}>Let’s take a look <ArrowRight size={15} /></Link>
-                  </div>
-                </article>
+                <ServiceCard key={title} icon={Icon} title={title} description={description} image={image} link={link} index={index} />
               ))}
             </div>
           </div>
@@ -818,25 +809,7 @@ export default function Home() {
             </div>
             <div className="destinations-grid">
               {destinations.map((destination, index) => (
-                <article className={`destination-card destination-card-${index + 1}`} key={destination.name}>
-                  <Image src={destination.image} alt={`${destination.name}, ${destination.country}`} fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized />
-                  <div className="destination-overlay" />
-                  <button
-                    className={`save-destination ${savedDestinations.includes(destination.name) ? "is-saved" : ""}`}
-                    type="button"
-                    aria-label={`${savedDestinations.includes(destination.name) ? "Remove" : "Save"} ${destination.name}`}
-                    onClick={() => toggleSaved(destination.name)}
-                  ><Heart size={17} fill={savedDestinations.includes(destination.name) ? "currentColor" : "none"} /></button>
-                  <div className="destination-info">
-                    <span className="destination-country">{destination.country}</span>
-                    <h3>{destination.name}</h3>
-                    <p>{destination.description}</p>
-                    <div className="destination-bottom">
-                      <span>{destination.price} <small>/ person</small></span>
-                      <button type="button" aria-label={`Explore ${destination.name}`} onClick={() => scrollToTripPlanner(destination.name)}><ArrowRight size={17} /></button>
-                    </div>
-                  </div>
-                </article>
+                <DestinationCard key={destination.name} destination={destination} index={index} savedDestinations={savedDestinations} toggleSaved={toggleSaved} scrollToTripPlanner={scrollToTripPlanner} />
               ))}
             </div>
           </div>
